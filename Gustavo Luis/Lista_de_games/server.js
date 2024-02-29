@@ -45,7 +45,7 @@ app.get("/mygames", (req, res) => {
         description: "Here we have some of my Games with Dollar Price",
         meus_games: { myGames }
     })
-})
+});
 
 
 
@@ -58,9 +58,23 @@ app.post("/newgame", (req, res) => {
 */
 
     const newGame = req.body
-    myGames.push(newGame)
+    myGames.push(newGame);
     res.status(200).json({
         message: "novo games recebido",
         new_game: { newGame }
-    })
-})
+    });
+});
+
+
+app.put("/mygames/:index", (req, res) => {
+    const { index } = req.params;
+    /*  const title = req.body.title;
+      const Desenvolvedora = req.body.Desenvolvedora;
+      const price = req.body.price;*/
+
+
+
+    myGames[index] = req.body;
+    const afterUpdate = myGames[index];
+    return res.status(200).json(afterUpdate)
+});
