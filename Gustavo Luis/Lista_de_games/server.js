@@ -36,6 +36,31 @@ app.get("/", (req, res) => {
         message: "Welcome to My Server",
         description: "Here we have some games",
         games_da_aula: { games },
+    })
+})
+
+app.get("/mygames", (req, res) => {
+    res.status(200).json({
+        message: "My Games Page ",
+        description: "Here we have some of my Games with Dollar Price",
         meus_games: { myGames }
+    })
+})
+
+
+
+app.post("/newgame", (req, res) => {
+
+    /*
+    const titulo = req.body.titulo;
+    const dev = req.body.Desenvolvedora;
+    const price = req.body.price;
+*/
+
+    const newGame = req.body
+    myGames.push(newGame)
+    res.status(200).json({
+        message: "novo games recebido",
+        new_game: { newGame }
     })
 })
