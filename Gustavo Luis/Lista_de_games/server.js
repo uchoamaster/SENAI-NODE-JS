@@ -71,10 +71,18 @@ app.put("/mygames/:index", (req, res) => {
     /*  const title = req.body.title;
       const Desenvolvedora = req.body.Desenvolvedora;
       const price = req.body.price;*/
-
-
-
     myGames[index] = req.body;
     const afterUpdate = myGames[index];
     return res.status(200).json(afterUpdate)
+});
+
+app.delete("/mygames/:index", (req, res) => {
+    const { index } = req.params;
+    /*  const title = req.body.title;
+      const Desenvolvedora = req.body.Desenvolvedora;
+      const price = req.body.price;*/
+    const DeletedGame = myGames[index];
+    myGames.splice(index, 1)
+
+    return res.status(200).json(DeletedGame)
 });
