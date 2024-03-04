@@ -5,6 +5,10 @@ const app = express();
 app.use(express.json())
 const port = process.env.PORT;
 
+const buscaPorNome = (nomeGame) => {
+    return myGames.filter(game => game.title.toLowerCase().includes(nomeGame.toLowerCase()))
+}
+
 app.listen(port, () => {
     console.log(`Servidor Rodando na porta ${port}`);
 })
@@ -39,12 +43,27 @@ app.get("/", (req, res) => {
     })
 })
 
-app.get("/mygames", (req, res) => {
+app.get("/mygames/all", (req, res) => {
     res.status(200).json({
         message: "My Games Page ",
         description: "Here we have some of my Games with Dollar Price",
         meus_games: { myGames }
     })
+});
+
+
+app.get("/mygames/busca", (req, res) => {
+    const busca = req.query.nome;
+    if (busca) {
+        const result = busca ? buscaPorNome(busca) : myGames;
+        if (result.length > 0) {
+            res.json(result)
+        } else {
+            res.json({ message: "Jogo não encontrado!!!" })
+        }
+    } else {
+        res.status(404).json({ message: "Parametro de pesquisa vazio" })
+    }
 });
 
 
