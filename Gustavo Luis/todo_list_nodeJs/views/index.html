@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Lista de tarefas NodeJS</title>
+    <link rel="stylesheet" href="/public/style.css">
+    <!-- Adicione o Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="tarefas">
+        <h3>TODOLIST NODE</h3>
+        <form class="d-flex" method="post" onsubmit="return validarFormulario()">
+            <input type="text" placeholder="Tarefa" class="form-control" name="task" />
+            <input type="submit" name="acao" class="btn btn-primary" value="Inserir" />
+        </form>
+        <% for(let i=0; i < taskList.length; i++){ %>
+            <p>
+                <%= taskList[i] %> | <a href="/deletar/<%= i %>"><i class="bi bi-trash"></i></a>
+            </p>
+            <% } %>
+
+    </div>
+</body>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function validarFormulario() {
+        var tarefa = document.getElementsByName("tarefas")[0].value;
+        if (tarefa.trim() === '') {
+            alert("Por favor, preencha a tarefa antes de enviar.");
+            return false; // Evita o envio do formulário se o campo estiver vazio
+        }
+        return true; // Permite o envio do formulário se o campo estiver preenchido
+    }
+</script>
+
+</html>
